@@ -14,9 +14,14 @@ node_modules/
 # Logs
 logs/
 *.log
+npm-debug.log*
+
+# Optional npm cache directory
+.npm
 
 # tools
 requests.http
 
 # misc
 .env
+.DS_Store
