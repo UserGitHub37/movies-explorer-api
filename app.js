@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
 
-const { PORT = 3000 } = process.env;
+const { PORT, MONGO_URL } = require('./utils/config');
 const NotFoundError = require('./errors/not-found-err');
 const { STATUS_CODE_OK, STATUS_CODE_INTERNAL_SERVER_ERROR } = require('./utils/statusCodes');
 const { login } = require('./controllers/login');
@@ -11,7 +11,7 @@ const auth = require('./middlewares/auth');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/moviesdb');
+mongoose.connect(MONGO_URL);
 
 app.use(express.json());
 
