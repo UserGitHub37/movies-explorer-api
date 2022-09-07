@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi, errors } = require('celebrate');
@@ -42,7 +44,7 @@ app.use(auth);
 
 app.use('/users', require('./routes/users'));
 
-// app.use('/movies', require('./routes/movies'));
+app.use('/movies', require('./routes/movies'));
 
 app.use('*', (req, res, next) => next(new NotFoundError('404 Not Found')));
 
