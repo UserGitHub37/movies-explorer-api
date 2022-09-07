@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { urlRegex } = require('../utils/config');
 
-const cardSchema = new mongoose.Schema({
+const movieSchema = new mongoose.Schema({
   country: {
     type: String,
     required: true,
@@ -72,4 +72,4 @@ const cardSchema = new mongoose.Schema({
   },
 }, { versionKey: false });
 
-module.exports = mongoose.model('card', cardSchema);
+module.exports = mongoose.model('movie', movieSchema);
