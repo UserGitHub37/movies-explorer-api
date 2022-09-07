@@ -10,12 +10,15 @@ const { STATUS_CODE_OK, STATUS_CODE_INTERNAL_SERVER_ERROR } = require('./utils/s
 const { login } = require('./controllers/login');
 const { createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 
 mongoose.connect(MONGO_URL);
 
 app.use(express.json());
+
+app.use(requestLogger);
 
 app.post('/signin', celebrate({
   body: Joi.object().keys({
@@ -47,6 +50,8 @@ app.use('/users', require('./routes/users'));
 app.use('/movies', require('./routes/movies'));
 
 app.use('*', (req, res, next) => next(new NotFoundError('404 Not Found')));
+
+app.use(errorLogger);
 
 app.use(errors());
 
