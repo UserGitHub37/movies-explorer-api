@@ -3,7 +3,8 @@ const { STATUS_CODE_INTERNAL_SERVER_ERROR } = require('../utils/statusCodes');
 module.exports.errorHandler = (err, req, res, next) => {
   const { statusCode = STATUS_CODE_INTERNAL_SERVER_ERROR, message } = err;
 
-  console.log('ОШИБКА: ', err.name, err.message);
+  console.log('err.name: ', err.name);
+  console.log('err.message: ', err.message);
 
   res
     .status(statusCode)

@@ -74,6 +74,8 @@ module.exports.updateUser = (req, res, next) => {
         next(new BadRequest('Передан некорректный _id пользователя'));
       } else if (err.name === 'ValidationError') {
         next(new BadRequest('Переданы некорректные данные при обновлении профиля'));
+      } else if (err.name === 'MongoServerError') {
+        next(new Conflict('Пользователь с таким email уже существует'));
       } else {
         next(err);
       }
