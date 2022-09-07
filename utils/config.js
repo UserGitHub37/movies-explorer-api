@@ -1,3 +1,10 @@
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // за 15 минут
+  max: 100, // можно совершить максимум 100 запросов с одного IP
+});
+
 const {
   NODE_ENV,
   PORT = 3000,
@@ -19,6 +26,7 @@ const allowedCors = NODE_ENV !== 'production'
   : ALLOWED_CORS.split(', ');
 
 module.exports = {
+  limiter,
   PORT,
   SALT_ROUND: Number(SALT_ROUND),
   JWT_SECRET,

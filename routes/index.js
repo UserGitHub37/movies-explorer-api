@@ -4,7 +4,7 @@ const NotFoundError = require('../errors/not-found-err');
 const { login } = require('../controllers/login');
 const { createUser } = require('../controllers/users');
 const auth = require('../middlewares/auth');
-const { loginValidation, createUserValidation } = require('../middlewares/requestМalidator');
+const { loginValidation, createUserValidation } = require('../middlewares/requestValidator');
 
 router.post('/signin', loginValidation, login);
 
