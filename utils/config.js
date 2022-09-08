@@ -25,12 +25,14 @@ const allowedCors = NODE_ENV !== 'production'
   ]
   : ALLOWED_CORS.split(', ');
 
+const corsOptions = { origin: allowedCors };
+
 module.exports = {
   limiter,
   PORT,
   SALT_ROUND: Number(SALT_ROUND),
   JWT_SECRET,
   urlRegex,
-  allowedCors,
   MONGO_URL,
+  corsOptions,
 };
