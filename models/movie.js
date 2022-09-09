@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
 
-const { urlRegex } = require('../utils/config');
+const linkValidationParams = {
+  validator(v) {
+    return validator.isURL(v);
+  },
+  message: 'Невалидная ссылка',
+};
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -26,32 +32,17 @@ const movieSchema = new mongoose.Schema({
   image: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        return urlRegex.test(v);
-      },
-      message: 'Не валидный URL',
-    },
+    validate: linkValidationParams,
   },
   trailerLink: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        return urlRegex.test(v);
-      },
-      message: 'Не валидный URL',
-    },
+    validate: linkValidationParams,
   },
   thumbnail: {
     type: String,
     required: true,
-    validate: {
-      validator(v) {
-        return urlRegex.test(v);
-      },
-      message: 'Не валидный URL',
-    },
+    validate: linkValidationParams,
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,

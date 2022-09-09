@@ -1,4 +1,12 @@
 const { celebrate, Joi } = require('celebrate');
+const validator = require('validator');
+
+const checkLink = (value, helpers) => {
+  if (validator.isURL(value)) {
+    return value;
+  }
+  return helpers.message('Невалидная ссылка');
+};
 
 const loginValidation = celebrate({
   body: Joi.object().keys({
@@ -29,9 +37,9 @@ const createMovieValidation = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().uri(),
-    trailerLink: Joi.string().required().uri(),
-    thumbnail: Joi.string().required().uri(),
+    image: Joi.string().required().custom(checkLink),
+    trailerLink: Joi.string().required().custom(checkLink),
+    thumbnail: Joi.string().required().custom(checkLink),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
     movieId: Joi.number().required(),
@@ -40,7 +48,7 @@ const createMovieValidation = celebrate({
 
 const deleteMovieValidation = celebrate({
   params: Joi.object().keys({
-    cardId: Joi.string().length(24).hex(),
+    movieId: Joi.string().length(24).hex(),
   }),
 });
 
