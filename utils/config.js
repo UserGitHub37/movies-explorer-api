@@ -1,8 +1,11 @@
 const rateLimit = require('express-rate-limit');
 
+const LIMITER_INTERVAL = 15 * 60 * 1000; // за 15 минут
+const LIMITER_MAX_REQUESTS = 100; // можно совершить максимум 100 запросов с одного IP
+
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // за 15 минут
-  max: 100, // можно совершить максимум 100 запросов с одного IP
+  windowMs: LIMITER_INTERVAL,
+  max: LIMITER_MAX_REQUESTS,
 });
 
 const {
@@ -13,8 +16,6 @@ const {
   ALLOWED_CORS,
   MONGO_URL = 'mongodb://localhost:27017/moviesdb',
 } = process.env;
-
-const urlRegex = /^https?:\/\/(w{3}\.)?[0-9a-z.-]{1,256}(\/([0-9a-z\-._~:/?#[\]@!$&'()*+,;=])*)?$/i;
 
 const allowedCors = NODE_ENV !== 'production'
   ? [
@@ -32,7 +33,6 @@ module.exports = {
   PORT,
   SALT_ROUND: Number(SALT_ROUND),
   JWT_SECRET,
-  urlRegex,
   MONGO_URL,
   corsOptions,
 };
