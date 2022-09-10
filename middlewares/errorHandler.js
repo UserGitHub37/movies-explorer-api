@@ -4,6 +4,7 @@ module.exports.errorHandler = (err, req, res, next) => {
   const { statusCode = STATUS_CODE_INTERNAL_SERVER_ERROR, message } = err;
 
   console.log('err.name: ', err.name);
+  console.log('err.code: ', err.code);
   console.log('err.message: ', err.message);
 
   res

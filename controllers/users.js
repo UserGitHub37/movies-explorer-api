@@ -20,35 +20,31 @@ module.exports.getUser = (req, res, next) => {
 
 module.exports.createUser = (req, res, next) => {
   const {
+    name,
     email,
     password,
   } = req.body;
 
-  User.findOne({ email })
-    .then((data) => {
-      if (data) {
+  bcrypt.hash(password, SALT_ROUND)
+    .then((hash) => User.create({
+      name,
+      email,
+      password: hash,
+    }))
+    .then((user) => {
+      const userData = user.toObject();
+      delete userData.password;
+      return res.status(STATUS_CODE_CREATED).send(userData);
+    })
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new BadRequest('Переданы некорректные данные при создании пользователя'));
+      } else if (err.code === 11000) {
         next(new Conflict('Пользователь с таким email уже существует'));
       } else {
-        bcrypt.hash(password, SALT_ROUND)
-          .then((hash) => User.create({
-            email,
-            password: hash,
-          }))
-          .then((user) => {
-            const userData = user.toObject();
-            delete userData.password;
-            return res.status(STATUS_CODE_CREATED).send(userData);
-          })
-          .catch((err) => {
-            if (err.name === 'ValidationError') {
-              next(new BadRequest('Переданы некорректные данные при создании пользователя'));
-            } else {
-              next(err);
-            }
-          });
+        next(err);
       }
-    })
-    .catch(next);
+    });
 };
 
 module.exports.updateUser = (req, res, next) => {
@@ -74,7 +70,7 @@ module.exports.updateUser = (req, res, next) => {
         next(new BadRequest('Передан некорректный _id пользователя'));
       } else if (err.name === 'ValidationError') {
         next(new BadRequest('Переданы некорректные данные при обновлении профиля'));
-      } else if (err.name === 'MongoServerError') {
+      } else if (err.code === 11000) {
         next(new Conflict('Пользователь с таким email уже существует'));
       } else {
         next(err);
