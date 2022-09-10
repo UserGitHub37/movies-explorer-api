@@ -20,6 +20,8 @@ const router = require('./routes');
 
 const app = express();
 
+app.use(requestLogger);
+
 app.use(limiter);
 
 app.use(helmet());
@@ -27,8 +29,6 @@ app.use(helmet());
 mongoose.connect(MONGO_URL);
 
 app.use(express.json());
-
-app.use(requestLogger);
 
 cors(corsOptions);
 
