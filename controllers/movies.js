@@ -6,7 +6,8 @@ const Forbidden = require('../errors/forbidden-err');
 const { STATUS_CODE_CREATED } = require('../utils/statusCodes');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  const { _id } = req.user;
+  Movie.find({ owner: _id })
     .then((movies) => res.send(movies))
     .catch(next);
 };
