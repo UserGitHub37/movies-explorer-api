@@ -58,16 +58,13 @@ module.exports.deleteMovie = (req, res, next) => {
     .orFail()
     .then((movie) => {
       if (req.user._id !== movie.owner._id.toString()) {
-        next(new Forbidden('Отсутствуют права на удаление фильма'));
-        return;
+        return next(new Forbidden('Отсутствуют права на удаление фильма'));
       }
 
-      Movie.findOneAndDelete({ movieId: req.params.movieId })
-        .orFail()
+      return movie.remove()
         .then(() => res.send({
           message: 'Фильм удалён',
-        }))
-        .catch(next);
+        }));
     })
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
