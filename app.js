@@ -30,7 +30,7 @@ mongoose.connect(MONGO_URL);
 
 app.use(express.json());
 
-cors(corsOptions);
+app.use(cors(corsOptions));
 
 app.use(router);
 
