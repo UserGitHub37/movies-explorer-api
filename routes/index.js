@@ -6,9 +6,19 @@ const { createUser } = require('../controllers/users');
 const auth = require('../middlewares/auth');
 const { loginValidation, createUserValidation } = require('../middlewares/requestValidator');
 
+const { STATUS_CODE_OK } = require('../utils/statusCodes');
+
 router.post('/signin', loginValidation, login);
 
 router.post('/signup', createUserValidation, createUser);
+
+router.get('/auth', auth, (req, res, next) => {
+  try {
+    res.sendStatus(STATUS_CODE_OK);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.use(auth);
 

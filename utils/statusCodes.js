@@ -1,3 +1,4 @@
+module.exports.STATUS_CODE_OK = 200;
 module.exports.STATUS_CODE_CREATED = 201;
 module.exports.STATUS_CODE_BAD_REQUEST = 400;
 module.exports.STATUS_CODE_UNAUTHORIZED = 401;
