@@ -6,7 +6,7 @@ module.exports.errorHandler = (err, req, res, next) => {
   console.log('err.name: ', err.name);
   console.log('err.code: ', err.code);
   console.log('err.message: ', err.message);
-
+  console.log('statusCode', statusCode);
   res
     .status(statusCode)
     .send({

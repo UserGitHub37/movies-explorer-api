@@ -8,7 +8,10 @@ const { STATUS_CODE_CREATED } = require('../utils/statusCodes');
 module.exports.getMovies = (req, res, next) => {
   const { _id } = req.user;
   Movie.find({ owner: _id })
-    .then((movies) => res.send(movies))
+    .then((movies) => {
+      const userMovies = movies.filter((card) => req.user._id === card.owner.toString());
+      return res.send(userMovies);
+    })
     .catch(next);
 };
 
@@ -54,7 +57,8 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findOne({ movieId: req.params.movieId })
+  const { _id } = req.user;
+  Movie.findOne({ movieId: req.params.movieId, owner: _id })
     .orFail()
     .then((movie) => {
       if (req.user._id !== movie.owner._id.toString()) {

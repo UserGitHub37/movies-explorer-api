@@ -1,6 +1,6 @@
 const rateLimit = require('express-rate-limit');
 
-const LIMITER_INTERVAL = 15 * 60 * 1000; // за 15 минут
+const LIMITER_INTERVAL = 1 * 60 * 1000; // за 1 минуту
 const LIMITER_MAX_REQUESTS = 100; // можно совершить максимум 100 запросов с одного IP
 
 const limiter = rateLimit({
