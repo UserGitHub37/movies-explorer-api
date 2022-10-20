@@ -36,7 +36,7 @@ app.use(router);
 
 app.use(errorLogger);
 
-app.use(errors());
+app.use(errors({ message: 'Ошибка валидации, проверьте введенные данные' }));
 
 app.use(errorHandler);
 
