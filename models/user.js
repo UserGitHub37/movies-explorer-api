@@ -1,20 +1,27 @@
 const mongoose = require('mongoose');
-const { isEmail } = require('validator');
 const bcrypt = require('bcryptjs');
 const Unauthorized = require('../errors/unauthorized-err');
+
+const { emailRegExp, nameRegExp } = require('../utils/config');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 2,
     maxlength: 30,
+    validate: {
+      validator(v) {
+        return nameRegExp.test(v);
+      },
+      message: 'Не валидное имя пользователя',
+    },
   },
   email: {
     type: String,
     required: true,
     validate: {
       validator(v) {
-        return isEmail(v);
+        return emailRegExp.test(v);
       },
       message: 'Не валидный адрес электронной почты',
     },

@@ -1,32 +1,40 @@
 const { celebrate, Joi } = require('celebrate');
-const validator = require('validator');
+const { isURL } = require('validator');
+const { emailRegExp, nameRegExp } = require('../utils/config');
 
 const checkLink = (value, helpers) => {
-  if (validator.isURL(value)) {
+  if (isURL(value)) {
     return value;
   }
   return helpers.message('Невалидная ссылка');
 };
 
+const checkName = (value, helpers) => {
+  if (nameRegExp.test(value) && value.length >= 2 && value.length <= 30) {
+    return value;
+  }
+  return helpers.message('Невалидное имя пользователя');
+};
+
 const loginValidation = celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().required().regex(emailRegExp),
     password: Joi.string().required(),
   }),
 });
 
 const createUserValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    email: Joi.string().required().email(),
+    name: Joi.string().required().custom(checkName),
+    email: Joi.string().required().regex(emailRegExp),
     password: Joi.string().required(),
   }),
 });
 
 const updateUserValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    email: Joi.string().required().email(),
+    name: Joi.string().required().custom(checkName),
+    email: Joi.string().required().regex(emailRegExp),
   }),
 });
 

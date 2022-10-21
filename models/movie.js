@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
+const { isURL } = require('validator');
 
 const linkValidationParams = {
   validator(v) {
-    return validator.isURL(v);
+    return isURL(v);
   },
   message: 'Невалидная ссылка',
 };

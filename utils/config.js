@@ -3,6 +3,9 @@ const rateLimit = require('express-rate-limit');
 const LIMITER_INTERVAL = 1 * 60 * 1000; // за 1 минуту
 const LIMITER_MAX_REQUESTS = 100; // можно совершить максимум 100 запросов с одного IP
 
+const nameRegExp = /^[A-Za-zА-Яа-яЁё-]+[A-Za-zА-Яа-яЁё\s-]*[A-Za-zА-Яа-яЁё-]*$/;
+const emailRegExp = /^([a-z0-9]+(?:[._-][a-z0-9]+)*)@([a-z0-9]+(?:[.-][a-z0-9]+)*\.[a-z]{2,})$/i;
+
 const limiter = rateLimit({
   windowMs: LIMITER_INTERVAL,
   max: LIMITER_MAX_REQUESTS,
@@ -35,4 +38,6 @@ module.exports = {
   JWT_SECRET,
   MONGO_URL,
   corsOptions,
+  emailRegExp,
+  nameRegExp,
 };
