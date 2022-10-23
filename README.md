@@ -1,15 +1,28 @@
-# Проект: movies-explorer-api
+## Проект: movies-explorer-api
+#### Бэкенд дипломного проекта в Яндекс Практикум по специальности "Веб-разработчик".
 
-## Бэкенд дипломного проекта в Яндекс Практикум.
-В дипломном проекте разрабатывается сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
+* * *
 
-## API развернут в Yandex Cloud на Ubuntu 20.04 и доступен по адресу:
+#### Функционал: API для аутентификации пользователей и сохранения фильмов.
+
+В проекте задействовано два API - [мой API](https://github.com/UserGitHub37/movies-explorer-api) с регистрацией, авторизацией пользователей и с их избранными (сохраненными) фильмами и [сторонний API](https://api.nomoreparties.co/beatfilm-movies) с базой фильмов.
+
+* * *
+
+#### Movies Explorer - интерактивный сайт с регистрацией и авторизацией, с поиском и сортировкой фильмов как в основной базе так и в сохраненных фильмах пользователя.
+
+Ссылка на сайт https://movies.thirtyseven.nomoredomains.sbs
+
+Ссылка на фронтенд проекта: https://github.com/UserGitHub37/movies-explorer-frontend
+
+* * *
+
+#### API развернут в Yandex Cloud на Ubuntu 20.04 и доступен по адресу:
 api.movies.thirtyseven.nomoredomains.sbs
 
-## Функционал:
-API для аутентификации пользователей и сохранения фильмов.
+* * *
 
-## Технологии:
+#### Технологии:
 JavaScript, Node.js, Express, CORS, MongoDB, mongoose, celebrate, helmet, express-rate-limit, escape-html, dotenv, bcryptjs, jsonwebtoken, winston, express-winston.
 
 * * *
