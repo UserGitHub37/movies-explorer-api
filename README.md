@@ -11,14 +11,14 @@
 
 #### Movies Explorer - интерактивный сайт с регистрацией и авторизацией, с поиском и сортировкой фильмов как в основной базе так и в сохраненных фильмах пользователя.
 
-Ссылка на сайт https://movies.thirtyseven.nomoredomains.sbs
+Ссылка на сайт https://movies.tw1.ru
 
 Ссылка на фронтенд проекта: https://github.com/UserGitHub37/movies-explorer-frontend
 
 * * *
 
-#### API развернут в Yandex Cloud на Ubuntu 20.04 и доступен по адресу:
-api.movies.thirtyseven.nomoredomains.sbs
+#### API развернут в Timeweb Cloud на Ubuntu 20.04 и доступен по адресу:
+https://api-movies.tw1.ru
 
 * * *
 
